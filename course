@@ -1,0 +1,138 @@
+#tmdb.original_language.value_counts().to_frame()  -- passa pra frame
+
+
+
+#tmdb.original_language.value_counts().to_frame().reset_index()  ---  reseta o index, passa o index atual para coluna 
+
+#contagem_de_lingua.columns = ["original_language", "total"]  --- renomeando as colunas
+
+
+#sns.barplot(x="original_language", y="total", data = contagem_de_lingua) -- coloca os eixos e redifne a data 
+
+# sns.catplot(x="original_language", kind="count", data=tmdb) ---  tipo de tratamento do dado = kind
+
+
+!pip install seaborn==0.9.0
+import seaborn as sns 
+
+
+
+
+
+
+Portanto, usaremos plt.pie() passando como parâmetros a coluna total de contagem_de_lingua e os nomes de cada categoria (labels), encontrados na coluna original_language.
+
+plt.pie(contagem_de_lingua["total"], labels = contagem_de_lingua["original_language"]) # usando grafico de pizza
+
+total_por_lingua = tmdb["original_language"].value_counts()         #conta
+total_por_lingua.loc["en"]       #localizar tudo que é en no exemplo
+
+
+
+
+total_por_lingua = tmdb["original_language"].value_counts()
+total_geral = total_por_lingua.sum()
+total_de_ingles = total_por_lingua.loc["en"]
+total_do_resto = total_geral - total_de_ingles
+print(total_de_ingles, total_do_resto)         ### juntou todas as outras linguas para mostrar no grafico
+
+
+
+
+
+
+
+dados = {
+    'lingua' : ['ingles','outros'],
+    'total' : [total_de_ingles, total_do_resto]
+
+}
+
+pd.DataFrame(dados)        # dicionario feito para mostrar somente os dados que eu quero .... depois transformou em data frame
+
+
+dados = {
+    'lingua' : ['ingles','outros'],
+    'total' : [total_de_ingles, total_do_resto]
+
+}
+
+dados = pd.DataFrame(dados)
+dados
+
+
+sns.barplot(data = dados, x = 'lingua', y = 'total') # e finalmente gerou a data com somente as infos necessarias 
+
+
+
+
+
+
+sns.catplot(x = "original_language", data = filmes_sem_lingua_original_em_ingles, kind="count", aspect=2) # aspect = 2 muda a largura do grafico, exemplo: 1 eh quadrado 2 eh retangulo (2xsquare)
+
+
+
+
+
+
+
+sns.catplot(x = "original_language", data = filmes_sem_lingua_original_em_ingles, 
+            kind="count", 
+            aspect=2,
+            order = total_por_lingua_de_outros_filmes.index)  # order = a ordem que vc quer que as infos aparecem ... 
+
+
+
+
+sns.catplot(x = "original_language", data = filmes_sem_lingua_original_em_ingles, 
+            kind="count", 
+            aspect=2,
+            palette="GnBu_d",
+            order = total_por_lingua_de_outros_filmes.index)  # pallete = as cores neste caso aparecem forte e depois vao ficando mais claras 
+
+
+
+
+# DESVIO PADRAO
+
+print("Desvio padrão do Jumanji %.2f" % notas_do_jumanji.nota.std(), "Desvio padrão do Toy Story %.2f" % notas_do_toy_story.nota.std())
+
+# STD = NUMERO DO DESVIO PADRAO 
+
+
+print("Nota média do Toy Story %.2f" % notas_do_toy_story.nota.mean())
+print("Nota média do Jumanji %.2f" % notas_do_jumanji.nota.mean()) ## nota media 
+
+# Desvio padrão do Jumanji 0.75
+
+#Desvio padrão do Toy Story 0.98
+
+
+
+print("Mediana do Toy Story %.2f" % notas_do_toy_story.nota.median())
+print("Mediana do Jumanji %.2f" % notas_do_jumanji.nota.median())   #mediana 
+
+
+# NUMPY E FAZER ARRAY
+
+
+import numpy as np
+
+np.array([2.5] * 10)
+
+#FAZER BOX SPLOT
+plt.boxplot([notas_do_toy_story.nota, notas_do_jumanji.nota])
+
+
+
+
+
+dispersão de dados = quanto os dados sao diferentes um dos outros
+desvio padrao = é a dispersão de dados em um numero
+
+
+
+
+
+carteira.style.hide_index() #esconde o index, porem, provavelmente ele continua na memoria e invisivem - nao consegui mais chamar a var.coluna
+
